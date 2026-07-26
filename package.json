@@ -1,25 +1,26 @@
 {
   "name": "dev-mcp",
-  "module": "src/index.ts",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "packages/mcp-core",
+    "mcp-server",
+    "mcp-personal"
+  ],
   "scripts": {
-    "start": "bun run src/index.ts",
+    "start": "bun run mcp-personal/src/index.ts",
+    "start:server": "bun run mcp-server/src/index.ts",
     "typecheck": "tsc --noEmit",
+    "test": "bun test",
     "prepare": "husky"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "bun-types": "^1.3.14",
+    "husky": "^9.1.7",
     "turbo": "^2.10.7"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "@octokit/rest": "^22.0.1",
-    "husky": "^9.1.7",
-    "npm-check-updates": "^22.2.9",
-    "zod": "^4.4.3"
   }
 }

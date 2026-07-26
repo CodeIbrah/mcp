@@ -4,6 +4,9 @@
     "typecheck": {
       "outputs": []
     },
+    "test": {
+      "outputs": []
+    },
     "start": {
       "dependsOn": ["typecheck"],
       "outputs": []

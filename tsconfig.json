@@ -5,7 +5,7 @@
     "module": "Preserve",
     "moduleDetection": "force",
     "allowJs": true,
-    "types": ["bun"],
+    "types": ["bun-types"],
 
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -19,8 +19,20 @@
     "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@dev-mcp/core": ["./packages/mcp-core/src/index.ts"],
+      "@dev-mcp/core/tools/github": ["./packages/mcp-core/src/tools/github/index.ts"],
+      "@dev-mcp/core/tools/context7": ["./packages/mcp-core/src/tools/context7/index.ts"],
+      "@dev-mcp/core/tools/exa": ["./packages/mcp-core/src/tools/exa/index.ts"]
+    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "tests"]
+  "include": [
+    "packages/mcp-core/src/**/*.ts",
+    "mcp-server/src/**/*.ts",
+    "mcp-personal/src/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

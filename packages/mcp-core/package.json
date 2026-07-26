@@ -1,0 +1,28 @@
+{
+  "name": "@dev-mcp/core",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "module": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tools/github": "./src/tools/github/index.ts",
+    "./tools/context7": "./src/tools/context7/index.ts",
+    "./tools/exa": "./src/tools/exa/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@octokit/rest": "^22.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
