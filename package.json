@@ -1,0 +1,25 @@
+{
+  "name": "dev-mcp",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "turbo": "^2.10.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@octokit/rest": "^22.0.1",
+    "husky": "^9.1.7",
+    "npm-check-updates": "^22.2.9",
+    "zod": "^4.4.3"
+  }
+}
