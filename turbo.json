@@ -10,6 +10,10 @@
     "start": {
       "dependsOn": ["typecheck"],
       "outputs": []
+    },
+    "build": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["^typecheck"]
     }
   }
 }

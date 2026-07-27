@@ -4,6 +4,7 @@
   "private": true,
   "workspaces": [
     "packages/mcp-core",
+    "packages/installer",
     "mcp-server",
     "mcp-personal"
   ],
@@ -11,6 +12,7 @@
     "start": "bun run mcp-personal/src/index.ts",
     "start:server": "bun run mcp-server/src/index.ts",
     "typecheck": "tsc --noEmit",
+    "build": "turbo run build",
     "test": "bun test",
     "prepare": "husky"
   },
