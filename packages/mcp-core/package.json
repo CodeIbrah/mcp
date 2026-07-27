@@ -8,7 +8,9 @@
     ".": "./src/index.ts",
     "./tools/github": "./src/tools/github/index.ts",
     "./tools/context7": "./src/tools/context7/index.ts",
-    "./tools/exa": "./src/tools/exa/index.ts"
+    "./tools/exa": "./src/tools/exa/index.ts",
+    "./tools/email": "./src/tools/email/index.ts",
+    "./tools/slack": "./src/tools/slack/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -17,6 +19,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@octokit/rest": "^22.0.1",
+    "nodemailer": "^9.0.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {

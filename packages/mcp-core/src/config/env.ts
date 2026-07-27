@@ -11,6 +11,16 @@ const envSchema = z.object({
   HOST: z.string().default("0.0.0.0"),
   PORT: z.coerce.number().int().min(1).max(65535).default(3001),
   CORS_ORIGIN: z.string().default("*"),
+
+  // Email (SMTP)
+  SMTP_HOST: z.string().optional(),
+  SMTP_PORT: z.coerce.number().int().min(1).max(65535).optional(),
+  SMTP_USER: z.string().optional(),
+  SMTP_PASS: z.string().optional(),
+  SMTP_FROM: z.string().email().optional(),
+
+  // Slack
+  SLACK_WEBHOOK_URL: z.string().url().optional(),
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -43,4 +53,9 @@ export function loadEnv(): Env {
 export function getEnv(): Env {
   if (!_env) return loadEnv();
   return _env;
+}
+
+/** @internal — clear cached env for testing */
+export function clearEnv(): void {
+  _env = null;
 }

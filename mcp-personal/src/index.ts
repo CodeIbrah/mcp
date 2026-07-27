@@ -7,6 +7,8 @@ import { loadEnv, logger, initSentry, flushSentry, createMcpServer, registerTool
 import { githubTools } from "@dev-mcp/core/tools/github";
 import { context7Tools } from "@dev-mcp/core/tools/context7";
 import { exaTools } from "@dev-mcp/core/tools/exa";
+import { emailTools } from "@dev-mcp/core/tools/email";
+import { slackTools } from "@dev-mcp/core/tools/slack";
 
 async function main(): Promise<void> {
   loadEnv();
@@ -14,7 +16,7 @@ async function main(): Promise<void> {
 
   initSentry();
 
-  const tools = registerTools(githubTools, context7Tools, exaTools);
+  const tools = registerTools(githubTools, context7Tools, exaTools, emailTools, slackTools);
   logger.info(`Registered ${tools.length} tools`);
 
   const server = createMcpServer("dev-mcp-personal", "1.0.0", tools);
