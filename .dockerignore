@@ -1,0 +1,54 @@
+# ── Git ──
+.git
+.gitignore
+.gitattributes
+
+# ── Dependencies (reinstalled in Docker) ──
+node_modules
+
+# ── Environment ──
+.env
+.env.local
+.env.prod
+
+# ── IDE / Editor ──
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── OS files ──
+.DS_Store
+Thumbs.db
+
+# ── Project-specific ──
+.turbo/
+.omo/
+.codegraph/
+graphify-out/
+.opencode/
+coverage/
+dist/
+
+# ── Logs ──
+*.log
+npm-debug.log*
+
+# ── Documentation (not needed at runtime) ──
+README.md
+LICENSE
+SECURITY.md
+CONTRIBUTING.md
+CHANGELOG.md
+
+# ── Tests (not needed at runtime) ──
+*.test.ts
+*.spec.ts
+__tests__/
+test-utils/
+vitest.config.ts
+
+# ── CI ──
+.husky/
+.github/

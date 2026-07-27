@@ -1,0 +1,43 @@
+# dev-mcp — docker-compose configuration
+# Usage:
+#   docker compose up -d                     # Start with .env
+#   docker compose --env-file .env.prod up   # Start with custom env
+#
+# Environment variables (see .env.example):
+#   Required: GITHUB_TOKEN
+#   Optional: CONTEXT7_API_KEY, EXA_API_KEY, SENTRY_DSN, etc.
+
+services:
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: dev-mcp
+    ports:
+      - "${PORT:-3001}:3001"
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3001
+      - GITHUB_TOKEN=${GITHUB_TOKEN:?GITHUB_TOKEN is required}
+      - CONTEXT7_API_KEY=${CONTEXT7_API_KEY:-}
+      - EXA_API_KEY=${EXA_API_KEY:-}
+      - SENTRY_DSN=${SENTRY_DSN:-}
+      - SENTRY_ENVIRONMENT=${SENTRY_ENVIRONMENT:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - CORS_ORIGIN=${CORS_ORIGIN:-*}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "bun", "-e", "fetch('http://localhost:3001/health').then(r => r.json()).then(d => process.exit(d.status === 'ok' ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # Resource limits (adjust as needed)
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 64M
