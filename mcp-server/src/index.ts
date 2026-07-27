@@ -1,7 +1,6 @@
 /**
  * @module mcp-server — Entry point for Streamable HTTP transport.
  * Thin wrapper for server/collective deployment (Docker/K8s).
- * Fase 2 will replace stdio with StreamableHTTPServerTransport + auth.
  */
 import { loadEnv, logger, initSentry, flushSentry, createMcpServer, registerTools } from "@dev-mcp/core";
 import { githubTools } from "@dev-mcp/core/tools/github";
@@ -19,8 +18,11 @@ async function main(): Promise<void> {
 
   const server = createMcpServer("dev-mcp-server", "1.0.0", tools);
 
+  let serverHandle: { stop: () => void } | undefined;
+
   const shutdown = async () => {
     logger.info("Shutting down...");
+    serverHandle?.stop();
     await flushSentry();
     process.exit(0);
   };
@@ -29,9 +31,8 @@ async function main(): Promise<void> {
   process.on("SIGTERM", shutdown);
 
   try {
-    // Fase 2: Replace with StreamableHTTPServerTransport
     const { startServer } = await import("./server");
-    await startServer(server);
+    serverHandle = await startServer(server);
   } catch (err) {
     logger.error("Failed to start server", { error: err });
     await flushSentry();

@@ -8,6 +8,9 @@ const envSchema = z.object({
   SENTRY_ENVIRONMENT: z.string().default("development"),
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  HOST: z.string().default("0.0.0.0"),
+  PORT: z.coerce.number().int().min(1).max(65535).default(3001),
+  CORS_ORIGIN: z.string().default("*"),
 });
 
 export type Env = z.infer<typeof envSchema>;
